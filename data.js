@@ -92,7 +92,7 @@ window.WALLPAPERS = [
  {
   "id": "isikli-mekanik-klavye",
   "title": "Işıklı Mekanik Klavye",
-  "category": "yazilim",
+  "category": "setup",
   "device": "desktop",
   "ts": "20261002204547",
   "width": 5504,
@@ -677,6 +677,83 @@ window.WALLPAPERS = [
   "added": "2026-10-03T13:20:15Z"
  },
  {
+  "id": "gece-yarisi-setup-i",
+  "title": "Gece Yarısı Setup'ı",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211036",
+  "width": 5504,
+  "height": 3072,
+  "size": 2073497,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "piksel-gun-batimi",
+  "title": "Piksel Gün Batımı",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211106",
+  "width": 5504,
+  "height": 3072,
+  "size": 1754267,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "yagmurlu-gece-setup-i",
+  "title": "Yağmurlu Gece Setup'ı",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211155",
+  "width": 5504,
+  "height": 3072,
+  "size": 2135272,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "masada-uyuyan-kedi",
+  "title": "Masada Uyuyan Kedi",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211208",
+  "width": 5504,
+  "height": 3072,
+  "size": 2145352,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "retro-masa",
+  "title": "Retro Masa",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211327",
+  "width": 5504,
+  "height": 3072,
+  "size": 1921564,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "klavye-isik-dalgasi",
+  "title": "Klavye Işık Dalgası 1",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211416",
+  "width": 5504,
+  "height": 3072,
+  "size": 1603607,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "klavye-isik-dalgasi-2",
+  "title": "Klavye Işık Dalgası 2",
+  "category": "setup",
+  "device": "desktop",
+  "ts": "20261003211441",
+  "width": 5504,
+  "height": 3072,
+  "size": 1580845,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
   "id": "tel-yeralti-garaji",
   "title": "Yeraltı Garajı",
   "category": "araba",
@@ -789,7 +866,7 @@ window.WALLPAPERS = [
  {
   "id": "tel-rgb-setup",
   "title": "RGB Setup",
-  "category": "oyun",
+  "category": "setup",
   "device": "phone",
   "ts": "20261003163912",
   "width": 3072,
@@ -1093,5 +1170,126 @@ window.WALLPAPERS = [
   "height": 5504,
   "size": 2476499,
   "added": "2026-10-03T15:33:17Z"
+ },
+ {
+  "id": "tel-yukaridan-klavye",
+  "title": "Yukarıdan Klavye",
+  "category": "setup",
+  "device": "phone",
+  "ts": "20261003211603",
+  "width": 3072,
+  "height": 5504,
+  "size": 1710596,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-tus-yakin-cekimi",
+  "title": "Tuş Yakın Çekimi",
+  "category": "setup",
+  "device": "phone",
+  "ts": "20261003211737",
+  "width": 3072,
+  "height": 5504,
+  "size": 1310334,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-gece-penceresi",
+  "title": "Gece Penceresi",
+  "category": "setup",
+  "device": "phone",
+  "ts": "20261003211915",
+  "width": 3072,
+  "height": 5504,
+  "size": 1757549,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-piksel-ekran",
+  "title": "Piksel Ekran",
+  "category": "setup",
+  "device": "phone",
+  "ts": "20261003212006",
+  "width": 3072,
+  "height": 5504,
+  "size": 1721602,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-metrobuste-gece",
+  "title": "Metrobüste Gece",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003212324",
+  "width": 3072,
+  "height": 5504,
+  "size": 1821617,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-kafede-muzik",
+  "title": "Kafede Müzik",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003212434",
+  "width": 3072,
+  "height": 5504,
+  "size": 1729665,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-bogazda-gece",
+  "title": "Boğazda Gece",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003212541",
+  "width": 3072,
+  "height": 5504,
+  "size": 1700244,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-yagmurda-durak",
+  "title": "Yağmurda Durak",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003212639",
+  "width": 3072,
+  "height": 5504,
+  "size": 1938127,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-metrobuste-pencere",
+  "title": "Metrobüste Pencere",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003213127",
+  "width": 3072,
+  "height": 5504,
+  "size": 1818478,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-kafede-kitap",
+  "title": "Kafede Kitap",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003213330",
+  "width": 3072,
+  "height": 5504,
+  "size": 2455383,
+  "added": "2026-10-03T18:36:11Z"
+ },
+ {
+  "id": "tel-gece-yuruyusu",
+  "title": "Gece Yürüyüşü",
+  "category": "lofi",
+  "device": "phone",
+  "ts": "20261003213441",
+  "width": 3072,
+  "height": 5504,
+  "size": 2131350,
+  "added": "2026-10-03T18:36:11Z"
  }
 ];
