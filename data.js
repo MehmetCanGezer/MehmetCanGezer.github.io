@@ -798,17 +798,6 @@ window.WALLPAPERS = [
   "added": "2026-10-03T13:59:49Z"
  },
  {
-  "id": "tel-catida-yalniz",
-  "title": "Çatıda Yalnız",
-  "category": "lofi",
-  "device": "phone",
-  "ts": "20261003163446",
-  "width": 3072,
-  "height": 5504,
-  "size": 2700338,
-  "added": "2026-10-03T13:59:49Z"
- },
- {
   "id": "tel-sakura-yolu",
   "title": "Sakura Yolu",
   "category": "lofi",
