@@ -237,6 +237,7 @@ main { padding: 28px 0 60px; }
 .lb-frame img.swap { opacity: 0; transform: scale(.985); }
 .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 50px; height: 50px; }
 .lb-prev { left: 20px; } .lb-next { right: 20px; }
+.lb-nav[hidden] { display: none; }
 @media (max-width: 720px) { .lb-nav { display: none; } }
 
 .lb-panel {
@@ -438,7 +439,7 @@ const HOWTO = {
 // cihaz bilgisi olmayan (eski önbellekteki) kayıtlar masaüstü sayılır
 const raw = (window.WALLPAPERS || []).map(w => ({ device: "desktop", ts: "", ...w }));
 const $ = id => document.getElementById(id);
-let cat = "tumu", query = "", view = [], current = -1;
+let cat = "tumu", query = "", view = [];
 // telefondan girene telefon görselleri, bilgisayardan girene masaüstü açılır
 let device = "all";
 const pool = () => device === "all"
@@ -574,10 +575,16 @@ $("grid").onclick = e => {
   const c = e.target.closest(".card"); if (c) openLb(+c.dataset.i);
 };
 
-// Lightbox
-function openLb(i) {
-  current = (i + view.length) % view.length;
-  const w = view[current], img = $("lbImg"), wasOpen = $("lb").classList.contains("open");
+// Lightbox — oklar alttaki şeridi (aynı kategori + cihaz) takip eder
+let nav = [], navIdx = 0, shownItem = null;
+const openLb = i => openItem(view[i]);
+const step = d => openItem(nav[(navIdx + d + nav.length) % nav.length]);
+function openItem(w) {
+  if (!w) return;
+  nav = all.filter(x => x.category === w.category && x.device === w.device);
+  navIdx = nav.indexOf(w);
+  shownItem = w;
+  const img = $("lbImg"), wasOpen = $("lb").classList.contains("open");
   // önce önbellekteki küçük görseli göster, büyük önizleme gelince değiştir
   const big = new Image();
   let shown = false;
@@ -586,11 +593,12 @@ function openLb(i) {
     img.src = big.complete && big.naturalWidth ? big.src : `img/thumb/${w.id}.jpg`;
     img.alt = w.title; img.classList.remove("swap"); shown = true;
   }, wasOpen ? 120 : 0);
-  big.onload = () => { if (shown && view[current] === w) img.src = big.src; };
+  big.onload = () => { if (shown && shownItem === w) img.src = big.src; };
   big.src = `img/preview/${w.id}.jpg`;
   $("lbBg").style.backgroundImage = `url(img/thumb/${w.id}.jpg)`;
 
-  $("lbCounter").textContent = `${current + 1} / ${view.length}`;
+  $("lbCounter").textContent = `${navIdx + 1} / ${nav.length}`;
+  $("lbPrev").hidden = $("lbNext").hidden = nav.length < 2;
   $("lbCat").innerHTML = CATS[w.category] + (isNew(w) ? '<span class="lb-new">YENİ</span>' : "");
   $("lbTitle").textContent = w.title;
   $("lbMeta").innerHTML = `<span>${w.width} × ${w.height}</span><span>${Math.max(w.width, w.height) >= 3840 ? "4K Ultra HD" : "2K"}</span><span>${w.device === "phone" ? "Telefon · 9:16" : "Masaüstü · 16:9"}</span><span>JPG · ${mb(w.size)}</span><span>Ücretsiz</span>`;
@@ -598,8 +606,8 @@ function openLb(i) {
   $("lbDl").setAttribute("download", `${w.id}-4k.jpg`);
   $("lbDlSize").textContent = mb(w.size);
 
-  // benzer görseller: aynı kategoriden, mevcut görsel başta
-  const same = all.filter(x => x.category === w.category && x.device === w.device);
+  // benzer görseller şeridi = gezinme listesi
+  const same = nav;
   $("lbStrip").classList.toggle("phone", w.device === "phone");
   $("howto").innerHTML = HOWTO[w.device];
   $("lbStripTitle").textContent = `Daha fazla ${CATS[w.category].toLocaleLowerCase("tr")} · ${same.length}`;
@@ -615,22 +623,15 @@ function openLb(i) {
   $("lb").classList.add("open");
   document.body.style.overflow = "hidden";
   history.replaceState(null, "", "#" + w.id);
-  [1, -1].forEach(d => { const n = view[(current + d + view.length) % view.length]; new Image().src = `img/preview/${n.id}.jpg`; });
+  [1, -1].forEach(d => { const n = nav[(navIdx + d + nav.length) % nav.length]; new Image().src = `img/preview/${n.id}.jpg`; });
 }
-function openById(id) {
-  const w = all.find(x => x.id === id);
-  if (!w) return;
-  if (w.device !== device) setDevice(w.device);
-  let i = view.findIndex(x => x.id === id);
-  if (i < 0) { cat = "tumu"; $("q").value = query = ""; renderChips(); render(); i = view.findIndex(x => x.id === id); }
-  openLb(i);
-}
+const openById = id => openItem(all.find(x => x.id === id));
 function closeLb() {
   $("lb").classList.remove("open"); $("howto").classList.remove("show"); document.body.style.overflow = "";
   history.replaceState(null, "", location.pathname + location.search);
 }
-$("lbPrev").onclick = () => openLb(current - 1);
-$("lbNext").onclick = () => openLb(current + 1);
+$("lbPrev").onclick = () => step(-1);
+$("lbNext").onclick = () => step(1);
 $("lbClose").onclick = closeLb;
 $("lbFrame").onclick = e => { if (e.target === $("lbFrame")) closeLb(); };
 $("howBtn").onclick = () => $("howto").classList.toggle("show");
@@ -644,8 +645,8 @@ $("lbShare").onclick = async () => {
 document.addEventListener("keydown", e => {
   if (!$("lb").classList.contains("open")) return;
   if (e.key === "Escape") closeLb();
-  if (e.key === "ArrowLeft") openLb(current - 1);
-  if (e.key === "ArrowRight") openLb(current + 1);
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
   if (e.key === "d" || e.key === "D") $("lbDl").click();
 });
 // swipe on mobile
@@ -653,7 +654,7 @@ let sx = null;
 $("lbStage").addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
 $("lbStage").addEventListener("touchend", e => {
   if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null;
-  if (Math.abs(dx) > 50) openLb(current + (dx < 0 ? 1 : -1));
+  if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
 });
 
 setDevice(device);
