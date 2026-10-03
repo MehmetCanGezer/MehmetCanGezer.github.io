@@ -1940,5 +1940,104 @@ window.WALLPAPERS = [
   "height": 5504,
   "size": 3388475,
   "added": "2026-10-03T19:57:43Z"
+ },
+ {
+  "id": "tel-gece-yarisi-kodlama",
+  "title": "Gece Yarısı Kodlama",
+  "category": "yazilim",
+  "device": "phone",
+  "ts": "20261003233243",
+  "width": 3072,
+  "height": 5504,
+  "size": 2199368,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-yagmurlu-gece-kodlama",
+  "title": "Yağmurlu Gece Kodlama",
+  "category": "yazilim",
+  "device": "phone",
+  "ts": "20261003233247",
+  "width": 3072,
+  "height": 5504,
+  "size": 2069032,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-ejderha-vadisi",
+  "title": "Ejderha Vadisi",
+  "category": "fantastik",
+  "device": "phone",
+  "ts": "20261003233309",
+  "width": 3072,
+  "height": 5504,
+  "size": 1918437,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-buyucunun-kulesi",
+  "title": "Büyücünün Kulesi",
+  "category": "fantastik",
+  "device": "phone",
+  "ts": "20261003233530",
+  "width": 3072,
+  "height": 5504,
+  "size": 1848567,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-tek-kayik",
+  "title": "Tek Kayık",
+  "category": "minimal",
+  "device": "phone",
+  "ts": "20261003233702",
+  "width": 3072,
+  "height": 5504,
+  "size": 1231939,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-gece-tepesi",
+  "title": "Gece Tepesi",
+  "category": "minimal",
+  "device": "phone",
+  "ts": "20261003233815",
+  "width": 3072,
+  "height": 5504,
+  "size": 1291724,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-kiz-kulesi-gun-dogumu",
+  "title": "Kız Kulesi Gün Doğumu",
+  "category": "sehir",
+  "device": "phone",
+  "ts": "20261003233905",
+  "width": 3072,
+  "height": 5504,
+  "size": 1738502,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-kitaplarin-arasinda-kedi",
+  "title": "Kitapların Arasında Kedi",
+  "category": "kedi",
+  "device": "phone",
+  "ts": "20261003234023",
+  "width": 3072,
+  "height": 5504,
+  "size": 2535386,
+  "added": "2026-10-03T20:42:52Z"
+ },
+ {
+  "id": "tel-yildizlari-izleyen-robot",
+  "title": "Yıldızları İzleyen Robot",
+  "category": "robot",
+  "device": "phone",
+  "ts": "20261003234131",
+  "width": 3072,
+  "height": 5504,
+  "size": 2712242,
+  "added": "2026-10-03T20:42:52Z"
  }
 ];
