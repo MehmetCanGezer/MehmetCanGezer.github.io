@@ -1,37 +1,51 @@
-// Detay sayfası: canlı kilit ekranı saati, önizleme modu, renk kopyalama, paylaşma, klavye ile gezinme
+// Detay sayfası: canlı saat/tarih, cihaz modu (macOS / Windows / kilit / ana ekran), renk kopyalama, paylaşma, klavye
 (function () {
   const $ = (id) => document.getElementById(id);
+  const all = (sel) => document.querySelectorAll(sel);
   const toast = (msg) => {
     const t = $("toast"); t.textContent = msg; t.classList.add("on");
     clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 1600);
   };
+  const set = (sel, text) => all(sel).forEach((el) => { el.textContent = text; });
 
-  // kilit ekranı / menü çubuğu saati (Türkçe tarih)
   const tick = () => {
     const now = new Date();
     const time = now.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
-    if ($("ltime")) $("ltime").textContent = time;
-    if ($("mclock")) $("mclock").textContent = time;
-    if ($("ldate")) $("ldate").textContent = now.toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" });
+    set("#ltime, .mtime, .wtime, .htime", time);
+    set("#ldate", now.toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" }));
+    set(".mdate", now.toLocaleDateString("tr-TR", { weekday: "short", day: "numeric", month: "short" }));
+    set(".wdate", now.toLocaleDateString("tr-TR"));
+    set(".cal-day", now.toLocaleDateString("tr-TR", { weekday: "short" }).toLocaleUpperCase("tr-TR").slice(0, 3));
+    set(".cal-num", String(now.getDate()));
   };
   tick(); setInterval(tick, 15000);
 
-  // "Kilit ekranı / Tam görsel"
+  // cihaz modu; masaüstünde seçilen sistem (macOS/Windows) hatırlanır
   const stage = document.querySelector(".stage");
-  document.querySelectorAll(".toggle button").forEach((b) => {
-    b.addEventListener("click", () => {
-      document.querySelectorAll(".toggle button").forEach((x) => x.setAttribute("aria-selected", x === b));
-      stage.classList.toggle("plain", b.dataset.mode === "plain");
-    });
-  });
+  const buttons = all(".toggle button");
+  const setMode = (mode) => {
+    stage.className = stage.className.replace(/\bmode-\S+/, "mode-" + mode);
+    buttons.forEach((b) => b.setAttribute("aria-selected", b.dataset.mode === mode));
+  };
+  if (stage && stage.dataset.kind === "desktop") {
+    try {
+      const os = localStorage.getItem("os");
+      if (os === "win" || os === "mac") setMode(os);
+      else if (/Windows/.test(navigator.userAgent)) setMode("win");
+    } catch (e) {}
+  }
+  buttons.forEach((b) => b.addEventListener("click", () => {
+    setMode(b.dataset.mode);
+    if (b.dataset.mode === "mac" || b.dataset.mode === "win") {
+      try { localStorage.setItem("os", b.dataset.mode); } catch (e) {}
+    }
+  }));
 
   // renk kodunu kopyala
-  document.querySelectorAll(".sw").forEach((s) => {
-    s.addEventListener("click", async () => {
-      try { await navigator.clipboard.writeText(s.dataset.hex); toast(s.dataset.hex + " kopyalandı"); }
-      catch (e) { toast(s.dataset.hex); }
-    });
-  });
+  all(".sw").forEach((s) => s.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(s.dataset.hex); toast(s.dataset.hex + " kopyalandı"); }
+    catch (e) { toast(s.dataset.hex); }
+  }));
 
   // paylaş (telefonda sistem paylaşımı, masaüstünde bağlantıyı kopyala)
   const share = $("share");

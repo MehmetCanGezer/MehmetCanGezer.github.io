@@ -55,7 +55,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* telefon çerçevesi + kilit ekranı */
 .phone {
-  position: relative; width: min(330px, 78vw); aspect-ratio: 9 / 19.5; border-radius: 52px;
+  container-type: inline-size; position: relative; width: min(330px, 78vw); aspect-ratio: 9 / 19.5; border-radius: 52px;
   padding: 11px; background: linear-gradient(145deg, #2a2a30, #0b0b0e); box-shadow: var(--shadow), inset 0 0 0 1.5px rgba(255,255,255,.08);
 }
 .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 42px; display: block; background: #111; }
@@ -68,24 +68,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* monitör çerçevesi */
 .monitor { width: 100%; display: flex; flex-direction: column; align-items: center; }
 .monitor .screen {
-  position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden;
+  container-type: inline-size; position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden;
   border: 10px solid #0c0c0f; border-bottom-width: 14px; background: #111; box-shadow: var(--shadow);
 }
 .monitor .screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.monitor .menubar {
-  position: absolute; top: 0; left: 0; right: 0; height: 22px; padding: 0 12px; display: flex; justify-content: space-between; align-items: center;
-  background: rgba(20,20,24,.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  color: #fff; font-size: 11px; font-weight: 600; transition: opacity .3s;
-}
-.monitor .menubar span:first-child { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.85); }
-.monitor .dock {
-  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; padding: 6px 8px; border-radius: 14px;
-  background: rgba(255,255,255,.18); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.2); transition: opacity .3s;
-}
-.monitor .dock i { width: 22px; height: 22px; border-radius: 6px; background: rgba(255,255,255,.55); display: block; }
-@media (max-width: 600px) { .monitor .dock i { width: 14px; height: 14px; border-radius: 4px; } .monitor .menubar { height: 16px; font-size: 9px; } }
 .monitor .stand { width: 16%; height: 44px; background: linear-gradient(#1b1b20, #0c0c0f); clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%); }
-.stage.plain .lock, .stage.plain .lbar, .stage.plain .island, .stage.plain .menubar, .stage.plain .dock { opacity: 0; }
 
 .toggle { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; background: var(--chip); border: 1px solid var(--line); }
 .toggle button { border: 0; background: transparent; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted); }
@@ -177,3 +164,73 @@ h1 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size
 }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- cihaz arayüzleri (özgün ikonlar) ---------- */
+.os, .home, .lock, .lbar, .island { transition: opacity .35s ease, visibility .35s; }
+.stage.mode-mac .win, .stage.mode-win .mac, .stage.mode-plain .os { opacity: 0; visibility: hidden; }
+.stage.mode-lock .home, .stage.mode-plain .home, .stage.mode-home .lock { opacity: 0; visibility: hidden; }
+.stage.mode-plain .lock, .stage.mode-plain .lbar, .stage.mode-plain .island { opacity: 0; }
+.os { position: absolute; inset: 0; color: #fff; font-family: -apple-system, "SF Pro Text", Inter, system-ui, sans-serif; pointer-events: none; }
+.os svg, .home svg { display: block; }
+.ic, .dk, .di, .tb, .pi { display: inline-flex; flex-direction: column; align-items: center; }
+.dk svg, .tb svg, .di svg, .pi svg {
+  width: 100%; aspect-ratio: 1; background: var(--g); border-radius: 23%; padding: 16%;
+  box-shadow: inset 0 0 0 .5px rgba(255,255,255,.35), 0 .3cqw .9cqw rgba(0,0,0,.28);
+}
+.cal svg { padding: 6%; }
+
+/* macOS tarzı */
+.mbar {
+  position: absolute; top: 0; left: 0; right: 0; height: 2.6cqw; padding: 0 1.4cqw; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(30,30,36,.22); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  font-size: 1.22cqw; font-weight: 500; text-shadow: 0 0 6px rgba(0,0,0,.25);
+}
+.mleft, .mright { display: flex; align-items: center; gap: 1.5cqw; white-space: nowrap; }
+.mleft span:nth-child(2) { font-weight: 700; }
+.mlogo { width: 1.3cqw; height: 1.3cqw; border-radius: 30%; background: #fff; opacity: .92; }
+.mright svg { height: 1.3cqw; width: auto; }
+.mdesk { position: absolute; top: 4.2cqw; right: 1.6cqw; display: flex; flex-direction: column; gap: 1.6cqw; align-items: center; }
+.di { width: 7.4cqw; }
+.di svg { width: 4.6cqw; }
+.di b { margin-top: .5cqw; font-size: 1.05cqw; font-weight: 600; text-align: center; line-height: 1.2; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+.mdock {
+  position: absolute; bottom: 1cqw; left: 50%; transform: translateX(-50%); display: flex; align-items: flex-end; gap: .7cqw;
+  padding: .7cqw; border-radius: 2cqw; background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(20px) saturate(1.7); -webkit-backdrop-filter: blur(20px) saturate(1.7);
+}
+.dk { width: 4.4cqw; }
+.mdock .sep { width: 1px; align-self: stretch; margin: .4cqw .2cqw; background: rgba(255,255,255,.4); }
+
+/* Windows 11 tarzı */
+.wdesk { position: absolute; top: 1.6cqw; left: 1.2cqw; display: flex; flex-direction: column; gap: 1.6cqw; align-items: center; }
+.win .di svg { width: 3.8cqw; border-radius: 16%; }
+.wbar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 4.6cqw; display: flex; align-items: center; justify-content: center;
+  background: rgba(28,28,34,.72); border-top: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(24px) saturate(1.5); -webkit-backdrop-filter: blur(24px) saturate(1.5);
+}
+.wapps { display: flex; gap: .5cqw; align-items: center; }
+.tb { width: 3.6cqw; padding: .55cqw; border-radius: .7cqw; }
+.tb:first-child { background: rgba(255,255,255,.08); }
+.tb svg { border-radius: 18%; padding: 14%; box-shadow: none; }
+.wtray { position: absolute; right: 1.2cqw; display: flex; align-items: center; gap: 1cqw; font-size: 1.05cqw; }
+.wtray svg { height: 1.4cqw; width: auto; }
+.wtray .chev { font-size: 1.2cqw; opacity: .8; }
+.wclock { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.25; font-variant-numeric: tabular-nums; }
+
+/* telefon ana ekranı */
+.home { position: absolute; inset: 11px; border-radius: 42px; overflow: hidden; color: #fff; font-family: -apple-system, "SF Pro Text", Inter, system-ui, sans-serif; }
+.hstatus { position: absolute; top: 4.6cqw; left: 9cqw; right: 8cqw; display: flex; justify-content: space-between; align-items: center; font-size: 4.6cqw; font-weight: 600; }
+.hicons { display: flex; gap: 1.6cqw; align-items: center; }
+.hicons svg { height: 3.6cqw; width: auto; }
+.hgrid { position: absolute; top: 17cqw; left: 6cqw; right: 6cqw; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 5cqw; justify-items: center; }
+.pi { width: 17cqw; }
+.pi b { margin-top: 1.4cqw; font-size: 3cqw; font-weight: 500; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.hsearch {
+  position: absolute; bottom: 30cqw; left: 50%; transform: translateX(-50%); padding: 1.6cqw 4.4cqw; border-radius: 99px; font-size: 3.4cqw; font-weight: 600;
+  background: rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.hdock {
+  position: absolute; bottom: 4cqw; left: 4cqw; right: 4cqw; display: flex; justify-content: space-around; padding: 4cqw 3cqw; border-radius: 9cqw;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(20px) saturate(1.6); -webkit-backdrop-filter: blur(20px) saturate(1.6);
+}
