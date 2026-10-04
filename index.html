@@ -442,7 +442,7 @@ footer .wrap { padding-top: 28px; padding-bottom: 40px; display: flex; justify-c
   </div>
 </div>
 
-<script src="data.js?v=20261004140325"></script>
+<script src="data.js?v=20261004140850"></script>
 <script>
 const CATS = {
   tumu: "Tümü", lofi: "Lofi", anime: "Anime", piksel: "Piksel", kedi: "Kediler", setup: "Setup",
@@ -529,7 +529,7 @@ function setDevice(d) {
   renderChips(); render();
 }
 $("seg").onclick = e => { const b = e.target.closest("button"); if (b && b.dataset.dev !== device) setDevice(b.dataset.dev); };
-$("heroCredit").onclick = () => openById(HERO_ID);
+$("heroCredit").onclick = () => { location.href = `w/${HERO_ID}/`; };
 
 // Chips
 function renderChips() {
@@ -563,7 +563,7 @@ function render() {
   $("grid").classList.toggle("mixed", device === "all");
   $("grid").innerHTML = view.map((w, i) => `
     <article class="card ${w.device === "phone" ? "port" : "land"}" data-i="${i}">
-      <a class="hit" href="w/${w.id}/" aria-label="${w.title} — önizle"></a>
+      <a class="hit" href="w/${w.id}/" aria-label="${w.title}"></a>
       ${isNew(w) ? '<span class="badge-new">YENİ</span>' : ""}
       <img data-src="img/thumb/${w.id}.jpg" alt="${w.title}" onload="this.classList.add('loaded')">
       <span class="overlay">
@@ -594,11 +594,7 @@ function layoutMasonry() {
 }
 let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layoutMasonry, 80); });
 $("grid").onclick = e => {
-  if (e.target.closest(".dl-mini")) return;
-  // Cmd/Ctrl/orta tık: detay sayfası yeni sekmede; normal tık: önizleme
-  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-  const c = e.target.closest(".card"); if (!c) return;
-  e.preventDefault(); openLb(+c.dataset.i);
+  // kart bağlantısı görselin kendi sayfasını (w/<id>/) açar
 };
 
 // Lightbox — oklar alttaki şeridi (aynı kategori + cihaz) takip eder
@@ -686,7 +682,9 @@ $("lbStage").addEventListener("touchend", e => {
 
 setDevice(device);
 // paylaşılan link: #gorsel-id
-if (location.hash) openById(decodeURIComponent(location.hash.slice(1)));
+// eski paylaşılan bağlantılar (#gorsel-id) artık görselin sayfasına gider
+if (location.hash && all.some(w => w.id === decodeURIComponent(location.hash.slice(1))))
+  location.replace(`w/${decodeURIComponent(location.hash.slice(1))}/`);
 </script>
 </body>
 </html>
